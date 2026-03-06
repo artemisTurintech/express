@@ -67,6 +67,7 @@
     "connect-redis": "^8.0.1",
     "cookie-parser": "1.4.7",
     "cookie-session": "2.1.1",
+    "cross-env": "^10.1.0",
     "ejs": "^3.1.10",
     "eslint": "8.47.0",
     "express-session": "^1.18.1",
@@ -92,10 +93,10 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "mocha --require test/support/env --reporter spec --check-leaks test/ test/acceptance/",
+    "test": "cross-env NODE_ENV=test NO_DEPRECATION=body-parser,express npx mocha --reporter spec --check-leaks test/ test/acceptance/",
     "test-ci": "nyc --exclude examples --exclude test --exclude benchmarks --reporter=lcovonly --reporter=text npm test",
     "test-cov": "nyc --exclude examples --exclude test --exclude benchmarks --reporter=html --reporter=text npm test",
-    "test-tap": "mocha --require test/support/env --reporter tap --check-leaks test/ test/acceptance/",
+    "test-tap": "cross-env NODE_ENV=test NO_DEPRECATION=body-parser,express npx mocha --reporter tap --check-leaks test/ test/acceptance/",
     "bench": "node benchmarks/run.js"
   }
 }
